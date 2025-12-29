@@ -1,0 +1,14 @@
+# Flask web framework
+Flask==3.0.0
+
+# PostgreSQL adapter for Python (compatible with Python 3.13)
+psycopg2-binary==2.9.10
+
+# HTTP requests library
+requests==2.31.0
+
+# Environment variable management
+python-dotenv==1.0.0
+
+# WSGI server for production
+gunicorn==21.2.0
