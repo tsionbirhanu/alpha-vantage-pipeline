@@ -12,3 +12,6 @@ python-dotenv==1.0.0
 
 # WSGI server for production
 gunicorn==21.2.0
+
+# Swagger UI for API documentation
+flask-swagger-ui==4.11.1

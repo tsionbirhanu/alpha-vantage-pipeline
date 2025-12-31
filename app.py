@@ -3,7 +3,8 @@ Flask API Application
 REST API for accessing stock data - compatible with n8n and Zapier.
 Provides read-only endpoints for stocks, prices, news, and events.
 """
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
+from flask_swagger_ui import get_swaggerui_blueprint
 from datetime import datetime, timedelta
 from config import Config
 from db.database import Database
@@ -16,6 +17,21 @@ from utils.logger import FetchLogger
 
 # Initialize Flask app
 app = Flask(__name__)
+
+
+# Swagger UI configuration
+SWAGGER_URL = '/api/docs'  # URL for exposing Swagger UI
+API_URL = '/swagger.json'  # URL for accessing the swagger spec
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Alpha Vantage Data Pipeline API"
+    }
+)
+
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 
 # Custom JSON encoder for datetime objects
@@ -35,6 +51,12 @@ app.json_encoder = DateTimeEncoder
 # HEALTH & STATUS ENDPOINTS
 # ============================================================================
 
+@app.route('/swagger.json')
+def swagger_spec():
+    """Serve the Swagger specification file."""
+    return send_from_directory('.', 'swagger.json')
+
+
 @app.route('/', methods=['GET'])
 def home():
     """API home page with available endpoints."""
@@ -42,6 +64,7 @@ def home():
         'name': 'Alpha Vantage Data Pipeline API',
         'version': '1.0.0',
         'status': 'running',
+        'documentation': '/api/docs',
         'endpoints': {
             'health': '/api/health',
             'stocks': '/api/stocks',
@@ -358,7 +381,8 @@ if __name__ == '__main__':
     print("\n  Available at:")
     print(f"  → http://localhost:{Config.FLASK_PORT}")
     print(f"  → http://{Config.FLASK_HOST}:{Config.FLASK_PORT}")
-    print("\n  Documentation: http://localhost:{Config.FLASK_PORT}")
+    print(f"\n  📚 API Documentation (Swagger UI):")
+    print(f"  → http://localhost:{Config.FLASK_PORT}/api/docs")
     print("="*70 + "\n")
     
     app.run(

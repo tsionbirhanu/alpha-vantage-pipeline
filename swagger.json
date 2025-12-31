@@ -1,0 +1,534 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Alpha Vantage Data Pipeline API",
+    "description": "REST API for accessing stock data - compatible with n8n and Zapier. Provides read-only endpoints for stocks, prices, news, and events.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://alpha-vantage-pipeline.onrender.com",
+      "description": "Production server"
+    },
+    {
+      "url": "http://localhost:5000",
+      "description": "Local development server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Health",
+      "description": "Health check and status endpoints"
+    },
+    {
+      "name": "Stocks",
+      "description": "Stock information endpoints"
+    },
+    {
+      "name": "Prices",
+      "description": "Stock price data endpoints"
+    },
+    {
+      "name": "News",
+      "description": "News articles endpoints"
+    },
+    {
+      "name": "Events",
+      "description": "Corporate events endpoints"
+    },
+    {
+      "name": "Statistics",
+      "description": "API usage statistics"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "API home page",
+        "description": "Returns API information and available endpoints",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {"type": "string"},
+                    "version": {"type": "string"},
+                    "status": {"type": "string"},
+                    "endpoints": {"type": "object"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "tags": ["Health"],
+        "summary": "Health check endpoint",
+        "description": "Checks API and database connectivity status",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {"type": "string", "example": "healthy"},
+                    "timestamp": {"type": "string", "format": "date-time"},
+                    "database": {"type": "string", "example": "connected"}
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service is unhealthy"
+          }
+        }
+      }
+    },
+    "/api/stocks": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get all stocks",
+        "description": "Get all stocks or filter by sector/industry",
+        "parameters": [
+          {
+            "name": "sector",
+            "in": "query",
+            "description": "Filter by sector (e.g., 'Technology')",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "industry",
+            "in": "query",
+            "description": "Filter by industry",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results (default: 100, max: 500)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100,
+              "maximum": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ticker": {"type": "string"},
+                          "name": {"type": "string"},
+                          "sector": {"type": "string"},
+                          "industry": {"type": "string"},
+                          "market_cap": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/stocks/{ticker}": {
+      "get": {
+        "tags": ["Stocks"],
+        "summary": "Get stock by ticker",
+        "description": "Get detailed information for a specific stock",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "path",
+            "description": "Stock ticker symbol (e.g., AAPL)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {"type": "string"},
+                    "name": {"type": "string"},
+                    "sector": {"type": "string"},
+                    "industry": {"type": "string"},
+                    "market_cap": {"type": "string"},
+                    "description": {"type": "string"}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Stock not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/daily-prices": {
+      "get": {
+        "tags": ["Prices"],
+        "summary": "Get daily prices",
+        "description": "Get daily price data for a specific ticker",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "query",
+            "description": "Stock ticker symbol (required)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "Start date in YYYY-MM-DD format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "end_date",
+            "in": "query",
+            "description": "End date in YYYY-MM-DD format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results (default: 60, max: 500)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 60,
+              "maximum": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {"type": "string"},
+                    "count": {"type": "integer"},
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": {"type": "string", "format": "date"},
+                          "open": {"type": "number"},
+                          "high": {"type": "number"},
+                          "low": {"type": "number"},
+                          "close": {"type": "number"},
+                          "volume": {"type": "integer"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing required ticker parameter"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/latest-price/{ticker}": {
+      "get": {
+        "tags": ["Prices"],
+        "summary": "Get latest price",
+        "description": "Get the most recent price for a ticker",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "path",
+            "description": "Stock ticker symbol (e.g., AAPL)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ticker": {"type": "string"},
+                    "date": {"type": "string", "format": "date"},
+                    "open": {"type": "number"},
+                    "high": {"type": "number"},
+                    "low": {"type": "number"},
+                    "close": {"type": "number"},
+                    "volume": {"type": "integer"}
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No price data found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/news": {
+      "get": {
+        "tags": ["News"],
+        "summary": "Get news articles",
+        "description": "Get news articles with optional filtering",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "query",
+            "description": "Filter by ticker symbol",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "Filter by date in YYYY-MM-DD format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results (default: 50, max: 200)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {"type": "string"},
+                          "url": {"type": "string"},
+                          "time_published": {"type": "string", "format": "date-time"},
+                          "summary": {"type": "string"},
+                          "source": {"type": "string"},
+                          "sentiment_score": {"type": "number"},
+                          "sentiment_label": {"type": "string"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/events": {
+      "get": {
+        "tags": ["Events"],
+        "summary": "Get corporate events",
+        "description": "Get corporate events (earnings, dividends, splits)",
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "query",
+            "description": "Filter by ticker symbol",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "event_type",
+            "in": "query",
+            "description": "Filter by event type",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["earnings", "dividend", "split"]
+            }
+          },
+          {
+            "name": "start_date",
+            "in": "query",
+            "description": "Filter by date in YYYY-MM-DD format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of results (default: 50, max: 200)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "maximum": 200
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {"type": "integer"},
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "ticker": {"type": "string"},
+                          "event_type": {"type": "string"},
+                          "event_date": {"type": "string", "format": "date"},
+                          "details": {"type": "object"}
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/api/statistics": {
+      "get": {
+        "tags": ["Statistics"],
+        "summary": "Get API usage statistics",
+        "description": "Get API usage statistics for a specified time period",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "description": "Number of days to analyze (default: 7)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 7
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "period_days": {"type": "integer"},
+                    "overall_stats": {"type": "object"},
+                    "key_usage": {"type": "object"}
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}
