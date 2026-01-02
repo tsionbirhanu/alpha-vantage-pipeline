@@ -77,14 +77,35 @@
                     "endpoints": {
                       "type": "object",
                       "properties": {
-                        "health": {"type": "string", "example": "/api/health"},
-                        "stocks": {"type": "string", "example": "/api/stocks"},
-                        "stock_detail": {"type": "string", "example": "/api/stocks/<ticker>"},
-                        "daily_prices": {"type": "string", "example": "/api/daily-prices"},
-                        "latest_price": {"type": "string", "example": "/api/latest-price/<ticker>"},
-                        "news": {"type": "string", "example": "/api/news"},
-                        "events": {"type": "string", "example": "/api/events"},
-                        "statistics": {"type": "string", "example": "/api/statistics"}
+                        "health": {
+                          "type": "string",
+                          "example": "/api/health"
+                        },
+                        "stocks": {
+                          "type": "string",
+                          "example": "/api/stocks"
+                        },
+                        "stock_detail": {
+                          "type": "string",
+                          "example": "/api/stocks/<ticker>"
+                        },
+                        "daily_prices": {
+                          "type": "string",
+                          "example": "/api/daily-prices"
+                        },
+                        "latest_price": {
+                          "type": "string",
+                          "example": "/api/latest-price/<ticker>"
+                        },
+                        "news": { "type": "string", "example": "/api/news" },
+                        "events": {
+                          "type": "string",
+                          "example": "/api/events"
+                        },
+                        "statistics": {
+                          "type": "string",
+                          "example": "/api/statistics"
+                        }
                       }
                     }
                   }
@@ -132,9 +153,9 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "status": {"type": "string", "example": "unhealthy"},
-                    "error": {"type": "string"},
-                    "timestamp": {"type": "string"}
+                    "status": { "type": "string", "example": "unhealthy" },
+                    "error": { "type": "string" },
+                    "timestamp": { "type": "string" }
                   }
                 }
               }
@@ -198,19 +219,40 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": {"type": "integer", "example": 1},
-                          "ticker": {"type": "string", "example": "AAPL"},
-                          "name": {"type": "string", "example": "Apple Inc"},
-                          "asset_type": {"type": "string", "example": "Common Stock"},
-                          "exchange": {"type": "string", "example": "NASDAQ"},
-                          "sector": {"type": "string", "example": "TECHNOLOGY"},
-                          "industry": {"type": "string", "example": "CONSUMER ELECTRONICS"},
-                          "market_cap": {"type": "number", "example": 4057362334000},
-                          "description": {"type": "string", "example": "Apple Inc. is a preeminent American multinational..."},
-                          "country": {"type": "string", "example": "USA"},
-                          "currency": {"type": "string", "example": "USD"},
-                          "created_at": {"type": "string", "example": "Mon, 29 Dec 2025 20:24:41 GMT"},
-                          "last_updated": {"type": "string", "example": "Mon, 29 Dec 2025 13:20:06 GMT"}
+                          "id": { "type": "integer", "example": 1 },
+                          "ticker": { "type": "string", "example": "AAPL" },
+                          "name": { "type": "string", "example": "Apple Inc" },
+                          "asset_type": {
+                            "type": "string",
+                            "example": "Common Stock"
+                          },
+                          "exchange": { "type": "string", "example": "NASDAQ" },
+                          "sector": {
+                            "type": "string",
+                            "example": "TECHNOLOGY"
+                          },
+                          "industry": {
+                            "type": "string",
+                            "example": "CONSUMER ELECTRONICS"
+                          },
+                          "market_cap": {
+                            "type": "number",
+                            "example": 4057362334000
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "Apple Inc. is a preeminent American multinational..."
+                          },
+                          "country": { "type": "string", "example": "USA" },
+                          "currency": { "type": "string", "example": "USD" },
+                          "created_at": {
+                            "type": "string",
+                            "example": "Mon, 29 Dec 2025 20:24:41 GMT"
+                          },
+                          "last_updated": {
+                            "type": "string",
+                            "example": "Mon, 29 Dec 2025 13:20:06 GMT"
+                          }
                         }
                       }
                     }
@@ -226,7 +268,7 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {"type": "string"}
+                    "error": { "type": "string" }
                   }
                 }
               }
@@ -260,19 +302,37 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {"type": "integer", "example": 1},
-                    "ticker": {"type": "string", "example": "AAPL"},
-                    "name": {"type": "string", "example": "Apple Inc"},
-                    "asset_type": {"type": "string", "example": "Common Stock"},
-                    "exchange": {"type": "string", "example": "NASDAQ"},
-                    "sector": {"type": "string", "example": "TECHNOLOGY"},
-                    "industry": {"type": "string", "example": "CONSUMER ELECTRONICS"},
-                    "market_cap": {"type": "number", "example": 4057362334000},
-                    "description": {"type": "string", "example": "Apple Inc. is a preeminent American multinational technology company..."},
-                    "country": {"type": "string", "example": "USA"},
-                    "currency": {"type": "string", "example": "USD"},
-                    "created_at": {"type": "string", "example": "Mon, 29 Dec 2025 20:24:41 GMT"},
-                    "last_updated": {"type": "string", "example": "Mon, 29 Dec 2025 13:20:06 GMT"}
+                    "id": { "type": "integer", "example": 1 },
+                    "ticker": { "type": "string", "example": "AAPL" },
+                    "name": { "type": "string", "example": "Apple Inc" },
+                    "asset_type": {
+                      "type": "string",
+                      "example": "Common Stock"
+                    },
+                    "exchange": { "type": "string", "example": "NASDAQ" },
+                    "sector": { "type": "string", "example": "TECHNOLOGY" },
+                    "industry": {
+                      "type": "string",
+                      "example": "CONSUMER ELECTRONICS"
+                    },
+                    "market_cap": {
+                      "type": "number",
+                      "example": 4057362334000
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Apple Inc. is a preeminent American multinational technology company..."
+                    },
+                    "country": { "type": "string", "example": "USA" },
+                    "currency": { "type": "string", "example": "USD" },
+                    "created_at": {
+                      "type": "string",
+                      "example": "Mon, 29 Dec 2025 20:24:41 GMT"
+                    },
+                    "last_updated": {
+                      "type": "string",
+                      "example": "Mon, 29 Dec 2025 13:20:06 GMT"
+                    }
                   }
                 }
               }
@@ -285,7 +345,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {"type": "string", "example": "Stock AAPL not found"}
+                    "error": {
+                      "type": "string",
+                      "example": "Stock AAPL not found"
+                    }
                   }
                 }
               }
@@ -368,15 +431,22 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": {"type": "integer", "example": 391},
-                          "ticker": {"type": "string", "example": "AAPL"},
-                          "date": {"type": "string", "example": "Mon, 29 Dec 2025 00:00:00 GMT"},
-                          "open": {"type": "string", "example": "272.6900"},
-                          "high": {"type": "string", "example": "274.3600"},
-                          "low": {"type": "string", "example": "272.3500"},
-                          "close": {"type": "string", "example": "273.7600"},
-                          "volume": {"type": "integer", "example": 23413058},
-                          "stock_id": {"type": "integer", "nullable": true, "example": null}
+                          "id": { "type": "integer", "example": 391 },
+                          "ticker": { "type": "string", "example": "AAPL" },
+                          "date": {
+                            "type": "string",
+                            "example": "Mon, 29 Dec 2025 00:00:00 GMT"
+                          },
+                          "open": { "type": "string", "example": "272.6900" },
+                          "high": { "type": "string", "example": "274.3600" },
+                          "low": { "type": "string", "example": "272.3500" },
+                          "close": { "type": "string", "example": "273.7600" },
+                          "volume": { "type": "integer", "example": 23413058 },
+                          "stock_id": {
+                            "type": "integer",
+                            "nullable": true,
+                            "example": null
+                          }
                         }
                       }
                     }
@@ -392,7 +462,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {"type": "string", "example": "ticker parameter is required"}
+                    "error": {
+                      "type": "string",
+                      "example": "ticker parameter is required"
+                    }
                   }
                 }
               }
@@ -429,15 +502,22 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "id": {"type": "integer", "example": 391},
-                    "ticker": {"type": "string", "example": "AAPL"},
-                    "date": {"type": "string", "example": "Mon, 29 Dec 2025 00:00:00 GMT"},
-                    "open": {"type": "string", "example": "272.6900"},
-                    "high": {"type": "string", "example": "274.3600"},
-                    "low": {"type": "string", "example": "272.3500"},
-                    "close": {"type": "string", "example": "273.7600"},
-                    "volume": {"type": "integer", "example": 23413058},
-                    "stock_id": {"type": "integer", "nullable": true, "example": null}
+                    "id": { "type": "integer", "example": 391 },
+                    "ticker": { "type": "string", "example": "AAPL" },
+                    "date": {
+                      "type": "string",
+                      "example": "Mon, 29 Dec 2025 00:00:00 GMT"
+                    },
+                    "open": { "type": "string", "example": "272.6900" },
+                    "high": { "type": "string", "example": "274.3600" },
+                    "low": { "type": "string", "example": "272.3500" },
+                    "close": { "type": "string", "example": "273.7600" },
+                    "volume": { "type": "integer", "example": 23413058 },
+                    "stock_id": {
+                      "type": "integer",
+                      "nullable": true,
+                      "example": null
+                    }
                   }
                 }
               }
@@ -450,7 +530,10 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {"type": "string", "example": "No price data found for AAPL"}
+                    "error": {
+                      "type": "string",
+                      "example": "No price data found for AAPL"
+                    }
                   }
                 }
               }
@@ -518,17 +601,47 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": {"type": "integer", "example": 382},
-                          "headline": {"type": "string", "example": "2026 Big Tech Quantum Bets: IBM and Amazon's Edge Over Pure-Plays?"},
-                          "summary": {"type": "string", "example": "In 2025, pure-play quantum computing stocks..."},
-                          "url": {"type": "string", "example": "https://finviz.com/news/263888/..."},
-                          "source": {"type": "string", "example": "Finviz"},
-                          "published_at": {"type": "string", "example": "Mon, 29 Dec 2025 21:06:03 GMT"},
-                          "sentiment_score": {"type": "string", "example": "0.40"},
-                          "sentiment_label": {"type": "string", "example": "Bullish"},
-                          "ticker_sentiment_score": {"type": "string", "nullable": true, "example": "0.390438"},
-                          "tickers": {"type": "string", "nullable": true, "example": null},
-                          "title": {"type": "string", "nullable": true, "example": null}
+                          "id": { "type": "integer", "example": 382 },
+                          "headline": {
+                            "type": "string",
+                            "example": "2026 Big Tech Quantum Bets: IBM and Amazon's Edge Over Pure-Plays?"
+                          },
+                          "summary": {
+                            "type": "string",
+                            "example": "In 2025, pure-play quantum computing stocks..."
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "https://finviz.com/news/263888/..."
+                          },
+                          "source": { "type": "string", "example": "Finviz" },
+                          "published_at": {
+                            "type": "string",
+                            "example": "Mon, 29 Dec 2025 21:06:03 GMT"
+                          },
+                          "sentiment_score": {
+                            "type": "string",
+                            "example": "0.40"
+                          },
+                          "sentiment_label": {
+                            "type": "string",
+                            "example": "Bullish"
+                          },
+                          "ticker_sentiment_score": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": "0.390438"
+                          },
+                          "tickers": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          },
+                          "title": {
+                            "type": "string",
+                            "nullable": true,
+                            "example": null
+                          }
                         }
                       }
                     }
@@ -610,11 +723,18 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "id": {"type": "integer", "example": 18},
-                          "ticker": {"type": "string", "example": "MSFT"},
-                          "event_type": {"type": "string", "enum": ["earnings", "dividend", "split"], "example": "dividend"},
-                          "event_date": {"type": "string", "example": "Thu, 19 Feb 2026 00:00:00 GMT"},
-                          "value": {"type": "string", "example": "3.4"}
+                          "id": { "type": "integer", "example": 18 },
+                          "ticker": { "type": "string", "example": "MSFT" },
+                          "event_type": {
+                            "type": "string",
+                            "enum": ["earnings", "dividend", "split"],
+                            "example": "dividend"
+                          },
+                          "event_date": {
+                            "type": "string",
+                            "example": "Thu, 19 Feb 2026 00:00:00 GMT"
+                          },
+                          "value": { "type": "string", "example": "3.4" }
                         }
                       }
                     }
@@ -655,17 +775,20 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "period_days": {"type": "integer", "example": 7},
+                    "period_days": { "type": "integer", "example": 7 },
                     "overall_stats": {
                       "type": "object",
                       "properties": {
-                        "period_days": {"type": "integer", "example": 7},
-                        "total_requests": {"type": "integer", "example": 159},
-                        "successful": {"type": "integer", "example": 157},
-                        "failed": {"type": "integer", "example": 2},
-                        "rate_limited": {"type": "integer", "example": 2},
-                        "success_rate": {"type": "number", "example": 98.74},
-                        "avg_response_time_ms": {"type": "number", "example": 1353.29}
+                        "period_days": { "type": "integer", "example": 7 },
+                        "total_requests": { "type": "integer", "example": 159 },
+                        "successful": { "type": "integer", "example": 157 },
+                        "failed": { "type": "integer", "example": 2 },
+                        "rate_limited": { "type": "integer", "example": 2 },
+                        "success_rate": { "type": "number", "example": 98.74 },
+                        "avg_response_time_ms": {
+                          "type": "number",
+                          "example": 1353.29
+                        }
                       }
                     },
                     "key_usage": {
@@ -673,10 +796,10 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "api_key_index": {"type": "integer", "example": 0},
-                          "request_count": {"type": "integer", "example": 53},
-                          "successful": {"type": "integer", "example": 53},
-                          "rate_limited": {"type": "integer", "example": 0}
+                          "api_key_index": { "type": "integer", "example": 0 },
+                          "request_count": { "type": "integer", "example": 53 },
+                          "successful": { "type": "integer", "example": 53 },
+                          "rate_limited": { "type": "integer", "example": 0 }
                         }
                       }
                     }
